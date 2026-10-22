@@ -33,10 +33,9 @@ highlighter: rouge
 theme: ~          # No theme — we use our own layout
 
 # Tell Jekyll which directories to include
+# Note: _includes, _layouts, _data are processed automatically (underscore prefix).
+# assets must be listed to ensure it is copied to _site.
 include:
-  - _includes
-  - _layouts
-  - _data
   - assets
 
 # Exclude non-production files from _site output

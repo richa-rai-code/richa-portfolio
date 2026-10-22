@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   RICHA RAI — PORTFOLIO  |  main.js (root mirror)
+   RICHA RAI — PORTFOLIO  |  main.js
    Handles:
      - Footer copyright year
      - Sticky nav scroll styling
@@ -8,6 +8,7 @@
      - Progressive-enhancement scroll reveal
      - Smooth scrolling for internal anchor links
      - Placeholder link guard
+     - Hero visual subtle parallax on mouse move
    ═══════════════════════════════════════════════════════════ */
 
 (function () {
@@ -34,12 +35,12 @@
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // Run once immediately on load
+  onScroll();
 
 
   /* ─── 3. MOBILE MENU DRAWER ──────────────────────────────── */
-  const hamburger   = document.getElementById('hamburger');
-  const mobileMenu  = document.getElementById('mobile-menu');
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-cta');
 
   function openMenu() {
@@ -83,7 +84,7 @@
 
   function updateActiveLink() {
     let current = '';
-    const scrollY = window.scrollY + 120; // offset for fixed header
+    const scrollY = window.scrollY + 120;
 
     sections.forEach(function (section) {
       const top    = section.offsetTop;
@@ -105,13 +106,7 @@
   }
 
 
-  /* ─── 5. PROGRESSIVE-ENHANCEMENT REVEAL ANIMATIONS ───────── */
-  /*
-   * Content is visible by default in CSS.
-   * Only elements well below the initial viewport fold are given
-   * .js-reveal-pending so they smoothly enter on scroll.
-   * Elements above the fold or in reduced-motion mode are NEVER touched.
-   */
+  /* ─── 5. SCROLL REVEAL ANIMATIONS ─────────────────────────── */
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealEls = document.querySelectorAll('.reveal');
 
@@ -127,8 +122,8 @@
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: '0px 0px -20px 0px'
+        threshold: 0.07,
+        rootMargin: '0px 0px -30px 0px'
       }
     );
 
@@ -136,7 +131,6 @@
 
     revealEls.forEach(function (el) {
       const rect = el.getBoundingClientRect();
-      // Only animate elements that start below the initial screen
       if (rect.top > windowHeight - 40) {
         el.classList.add('js-reveal-pending');
         revealObserver.observe(el);
@@ -150,7 +144,7 @@
   /* ─── 6. SMOOTH SCROLLING ────────────────────────────────── */
   document.querySelectorAll('a[href*="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href') || '';
+      const href    = this.getAttribute('href') || '';
       const hashIdx = href.lastIndexOf('#');
       if (hashIdx === -1) return;
 
@@ -161,14 +155,11 @@
       if (!target) return;
 
       e.preventDefault();
-      const navOffset = 70;
+      const navOffset = 80;
       const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      const offsetPosition  = elementPosition + window.pageYOffset - navOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
 
       if (history.pushState) {
         history.pushState(null, '', '#' + targetId);
@@ -181,15 +172,48 @@
   document.querySelectorAll('[data-placeholder="true"]').forEach(function (el) {
     el.addEventListener('click', function (e) {
       const href = el.getAttribute('href');
-      if (href === '#' || !href) {
+      if (href === '#' || !href || href.startsWith('mailto:your.')) {
         e.preventDefault();
-        const originalOpacity = el.style.opacity;
-        el.style.opacity = '0.35';
-        setTimeout(function () {
-          el.style.opacity = originalOpacity || '';
-        }, 280);
+        el.style.opacity = '0.3';
+        setTimeout(function () { el.style.opacity = ''; }, 320);
       }
     });
   });
+
+
+  /* ─── 8. HERO PROFILE PANEL — SUBTLE MOUSE PARALLAX ──────── */
+  if (!prefersReducedMotion) {
+    const profileFrame = document.querySelector('.profile-frame');
+    const hero         = document.querySelector('.hero');
+
+    if (profileFrame && hero) {
+      let ticking = false;
+
+      hero.addEventListener('mousemove', function (e) {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          const rect  = hero.getBoundingClientRect();
+          const cx    = rect.left + rect.width  / 2;
+          const cy    = rect.top  + rect.height / 2;
+          const dx    = (e.clientX - cx) / rect.width;
+          const dy    = (e.clientY - cy) / rect.height;
+          const rotX  = (-dy * 5).toFixed(2);
+          const rotY  = ( dx * 5).toFixed(2);
+          profileFrame.style.transform =
+            'perspective(800px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+          ticking = false;
+        });
+      });
+
+      hero.addEventListener('mouseleave', function () {
+        profileFrame.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1), border-color 0.32s, box-shadow 0.32s';
+        profileFrame.style.transform  = 'perspective(800px) rotateX(0) rotateY(0)';
+        setTimeout(function () {
+          profileFrame.style.transition = '';
+        }, 620);
+      });
+    }
+  }
 
 })();
