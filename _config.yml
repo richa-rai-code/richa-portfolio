@@ -24,8 +24,8 @@ author: "Richa Rai"
 #   baseurl: ""
 #
 # Leave both as "" for local development (bundle exec jekyll serve).
-url: ""
-baseurl: ""
+url: "https://richa-rai-code.github.io"
+baseurl: "/richa-portfolio"
 
 # ── Build settings ──────────────────────────────────
 markdown: kramdown
