@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    RICHA RAI — PORTFOLIO  |  main.js
    Handles:
+     - Cinematic preloader (session-gated, two-phase exit)
      - Footer copyright year
      - Sticky nav scroll styling
      - Mobile menu drawer & keyboard accessibility
@@ -10,6 +11,146 @@
      - Placeholder link guard
      - Hero visual subtle parallax on mouse move
    ═══════════════════════════════════════════════════════════ */
+
+
+/* ═══════════════════════════════════════════════════════════
+   MODULE 0 — ULTRA-PREMIUM CINEMATIC PRELOADER
+   ═══════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var htmlEl    = document.documentElement;
+  var preloader = document.getElementById('preloader');
+  var fill      = document.getElementById('pl-progress');
+  var label     = document.getElementById('pl-label');
+  var statusEl  = document.getElementById('pl-status');
+
+  /* Only run if the session gate is active */
+  if (!preloader || htmlEl.getAttribute('data-preloader') !== 'active') {
+    return;
+  }
+
+  /* Mark session so ordinary back/forward and navigation don't replay the preloader */
+  try { sessionStorage.setItem('rrPlShown', '1'); } catch (e) { /* noop */ }
+
+  /* ── Progress simulation ─────────────────────────────────
+     Eases smoothly from 0 → ~88% over ~2s using an exponential
+     decay curve, then jumps to 100% on window load or safety net.
+  ────────────────────────────────────────────────────────── */
+  var progress    = 0;
+  var rafId       = null;
+  var startTime   = performance.now();
+  var loadFired   = false;
+  var CRAWL_DURATION = 2200;
+
+  function setProgress(pct) {
+    progress = Math.max(progress, Math.min(pct, 100));
+    if (fill)  fill.style.width = progress + '%';
+    if (label) label.textContent = Math.round(progress) + '%';
+    if (statusEl) {
+      if (progress < 40) {
+        statusEl.textContent = 'INITIALIZING';
+      } else if (progress < 85) {
+        statusEl.textContent = 'LOADING EXPERIENCE';
+      } else {
+        statusEl.textContent = 'READY';
+      }
+    }
+  }
+
+  function tick(now) {
+    if (loadFired) return;
+    var elapsed = now - startTime;
+    /* Ease-out curve: swift beginning, smoothly settling towards 88% */
+    var eased = 88 * (1 - Math.exp(-elapsed / 700));
+    setProgress(eased);
+    if (elapsed < CRAWL_DURATION) {
+      rafId = requestAnimationFrame(tick);
+    }
+  }
+
+  rafId = requestAnimationFrame(tick);
+
+  /* ── Exit sequence ───────────────────────────────────────
+     Phase 1: fade inner content & glint (0.52s)
+     Phase 2: curtain rises, hero emerges (0.92s)
+     Phase 3: remove from paint tree (display:none)
+     Restores body scroll before slide to eliminate CLS.
+  ────────────────────────────────────────────────────────── */
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var exiting = false;
+
+  function exitPreloader() {
+    if (exiting) return;
+    exiting = true;
+
+    /* Stop simulation loop */
+    if (rafId) cancelAnimationFrame(rafId);
+    loadFired = true;
+
+    /* Complete progress to 100% */
+    setProgress(100);
+
+    /* Brief pause at 100% for psychological closure */
+    setTimeout(function () {
+      /* Phase 1 — dissolve inner content */
+      preloader.classList.add('pl--fade');
+
+      var FADE_DUR = prefersReduced ? 400 : 520;
+
+      setTimeout(function () {
+        /* Restore body scroll BEFORE the curtain moves */
+        document.body.style.overflow = '';
+
+        if (!prefersReduced) {
+          /* Add homepage revelation class so hero breathes into focus */
+          htmlEl.classList.add('is-revealing');
+
+          /* Phase 2 — slide silk curtain up */
+          preloader.classList.add('pl--exit');
+
+          setTimeout(function () {
+            /* Phase 3 — remove from paint tree and finalize */
+            htmlEl.removeAttribute('data-preloader');
+            htmlEl.classList.remove('is-revealing');
+            preloader.classList.add('pl--done');
+            preloader.setAttribute('aria-hidden', 'true');
+          }, 950);
+
+        } else {
+          /* Reduced motion: just fade out smoothly */
+          htmlEl.removeAttribute('data-preloader');
+          preloader.classList.add('pl--done');
+          preloader.setAttribute('aria-hidden', 'true');
+        }
+
+      }, FADE_DUR);
+
+    }, prefersReduced ? 80 : 180);
+  }
+
+  /* ── Trigger on window load ──────────────────────────────── */
+  if (document.readyState === 'complete') {
+    /* Page already loaded (cached) — short display */
+    setTimeout(exitPreloader, 1000);
+  } else {
+    window.addEventListener('load', function () {
+      /* Ensure minimum display of 1.5s for the animation to be enjoyed */
+      var elapsed    = performance.now() - startTime;
+      var minDisplay = 1500;
+      var delay      = Math.max(0, minDisplay - elapsed);
+      setTimeout(exitPreloader, delay);
+    }, { once: true });
+  }
+
+  /* ── Safety net — guaranteed to never stall beyond 4.5s ─── */
+  setTimeout(function () {
+    if (!exiting) exitPreloader();
+  }, 4500);
+
+})();
+
+
 
 (function () {
   'use strict';

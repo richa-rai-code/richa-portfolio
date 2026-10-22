@@ -36,4 +36,55 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+
+    <!--
+      PRELOADER SESSION GATE & CRITICAL STYLES
+      Runs synchronously before first paint.
+      Shows on:
+        1. First visit in session (!sessionStorage.rrPlShown)
+        2. Hard refresh or browser reload (PerformanceNavigationTiming.type === 'reload')
+      Never shows on ordinary in-session navigation.
+      Critical CSS prevents any flash of unstyled content or background flicker.
+    -->
+    <style id="pl-critical-style">
+      html[data-preloader="active"] {
+        background-color: #080706 !important;
+      }
+      html[data-preloader="active"] body {
+        overflow: hidden !important;
+      }
+      html[data-preloader="active"] #preloader {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 99999 !important;
+        background-color: #080706 !important;
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+      }
+      html:not([data-preloader="active"]) #preloader {
+        display: none !important;
+      }
+    </style>
+    <script>
+      (function(){
+        try {
+          var isReload = false;
+          if (window.performance) {
+            var nav = performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+            if (nav && nav.type === 'reload') {
+              isReload = true;
+            } else if (performance.navigation && performance.navigation.type === 1) {
+              isReload = true;
+            }
+          }
+          if (isReload || !sessionStorage.getItem('rrPlShown')) {
+            document.documentElement.setAttribute('data-preloader','active');
+          }
+        } catch(e) {
+          /* Fallback gracefully */
+        }
+      })();
+    </script>
   </head>

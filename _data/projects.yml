@@ -36,16 +36,16 @@
 - number: "03"
   title: Personal Portfolio Website
   description: >-
-    This portfolio — a minimal, responsive Jekyll website built with semantic
-    HTML, vanilla CSS, and vanilla JavaScript. Designed from scratch without
-    frameworks or templates.
+    This portfolio — an ultra-premium, responsive Jekyll experience built with semantic
+    HTML, vanilla CSS, and vanilla JavaScript. Designed with bespoke typography,
+    cinematic motion, and zero external UI frameworks.
   tech:
     - HTML
     - CSS
     - JavaScript
     - Jekyll
-  github_url: ""   # PLACEHOLDER: replace with real URL e.g. https://github.com/your-username/portfolio
-  live_url: ""     # PLACEHOLDER: replace with live URL e.g. https://richarai.github.io
+  github_url: "https://github.com/richa-rai-code/richa-portfolio"
+  live_url: "https://richa-rai-code.github.io/richa-portfolio"
   wip: false
 
 - number: "04"

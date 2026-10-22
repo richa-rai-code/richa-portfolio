@@ -1,0 +1,135 @@
+<!-- ══════════════════════════════════════════
+     PRELOADER — _includes/preloader.html
+
+     Ultra-Premium Cinematic Experience:
+     - Obsidian-black background with subtle ambient light bloom
+     - Champagne-gold animated emblem & high-precision SVG chronometer rings
+     - Editorial monogram in Cormorant Garamond with metallic gold sheen
+     - Specular light reflection glint
+     - High-precision progress indicator with tabular figures
+     - Two-phase silk-curtain exit transition into homepage
+     - Session-gated & reload-aware (shows on first visit & hard refresh only)
+     - Full accessibility & reduced-motion support
+══════════════════════════════════════════ -->
+<div
+  class="pl"
+  id="preloader"
+  role="status"
+  aria-label="Loading Richa Rai portfolio"
+  aria-live="polite"
+>
+  <!-- Ambient breathing gold bloom -->
+  <div class="pl__bloom" aria-hidden="true"></div>
+
+  <!-- Specular light glint reflection -->
+  <div class="pl__glint" aria-hidden="true"></div>
+
+  <!-- Central luxury emblem -->
+  <div class="pl__emblem" aria-hidden="true">
+
+    <!-- High-precision SVG ring with gold gradient & cardinal diamonds -->
+    <svg
+      class="pl__ring"
+      viewBox="0 0 160 160"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <!-- Metallic champagne gold gradient for animated arc -->
+        <linearGradient id="plGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fff5db" />
+          <stop offset="45%" stop-color="#d4b276" />
+          <stop offset="80%" stop-color="#c9a96e" />
+          <stop offset="100%" stop-color="#8e6f36" />
+        </linearGradient>
+        <!-- Subtle radial glow for the center of the emblem -->
+        <radialGradient id="plEmblemGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(201,169,110,0.14)" />
+          <stop offset="70%" stop-color="rgba(201,169,110,0.03)" />
+          <stop offset="100%" stop-color="transparent" />
+        </radialGradient>
+      </defs>
+
+      <!-- Center subtle halo -->
+      <circle cx="80" cy="80" r="58" fill="url(#plEmblemGlow)" />
+
+      <!-- Outer track (whisper-thin hairline) -->
+      <circle
+        cx="80" cy="80" r="72"
+        stroke="rgba(201,169,110,0.14)"
+        stroke-width="0.75"
+      />
+
+      <!-- Middle dashed orbit -->
+      <circle
+        cx="80" cy="80" r="64"
+        stroke="rgba(201,169,110,0.07)"
+        stroke-width="0.5"
+        stroke-dasharray="2 5"
+      />
+
+      <!-- Inner boundary track -->
+      <circle
+        cx="80" cy="80" r="54"
+        stroke="rgba(201,169,110,0.05)"
+        stroke-width="0.5"
+      />
+
+      <!-- Animated golden arc (drawn from 12 o'clock) -->
+      <circle
+        class="pl__arc"
+        cx="80" cy="80" r="72"
+        stroke="url(#plGoldGrad)"
+        stroke-width="1.25"
+        stroke-linecap="round"
+        stroke-dasharray="452.389"
+        stroke-dashoffset="452.389"
+      />
+
+      <!-- Cardinal tick marks & micro-diamonds -->
+      <g class="pl__ticks" stroke="#c9a96e" stroke-width="0.75" stroke-linecap="round">
+        <!-- Top tick & diamond -->
+        <line class="pl__tick" x1="80" y1="2"  x2="80" y2="9" />
+        <polygon class="pl__diamond" points="80,10 81.5,12 80,14 78.5,12" fill="#c9a96e" />
+
+        <!-- Bottom tick & diamond -->
+        <line class="pl__tick" x1="80" y1="151" x2="80" y2="158" />
+        <polygon class="pl__diamond" points="80,146 81.5,148 80,150 78.5,148" fill="#c9a96e" />
+
+        <!-- Left tick & diamond -->
+        <line class="pl__tick" x1="2"  y1="80" x2="9"  y2="80" />
+        <polygon class="pl__diamond" points="10,80 12,81.5 14,80 12,78.5" fill="#c9a96e" />
+
+        <!-- Right tick & diamond -->
+        <line class="pl__tick" x1="151" y1="80" x2="158" y2="80" />
+        <polygon class="pl__diamond" points="146,80 148,81.5 150,80 148,78.5" fill="#c9a96e" />
+      </g>
+    </svg>
+
+    <!-- Bespoke Cormorant Garamond monogram -->
+    <div class="pl__monogram">
+      <span class="pl__letter">R</span>
+    </div>
+
+  </div>
+
+  <!-- Luxury editorial wordmark -->
+  <div class="pl__wordmark" aria-hidden="true">
+    <span class="pl__name">RICHA RAI</span>
+    <span class="pl__divider"></span>
+    <span class="pl__title">BCA &middot; DATA SCIENCE &amp; AI</span>
+  </div>
+
+  <!-- Sophisticated progress indicator -->
+  <div class="pl__progress-wrap" aria-hidden="true">
+    <div class="pl__progress-meta">
+      <span class="pl__status" id="pl-status">INITIALIZING</span>
+      <span class="pl__count" id="pl-label">0%</span>
+    </div>
+    <div class="pl__progress-track">
+      <div class="pl__progress-fill" id="pl-progress"></div>
+    </div>
+  </div>
+
+</div>

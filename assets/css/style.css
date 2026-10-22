@@ -1383,3 +1383,431 @@ button {
   letter-spacing: -0.04em;
   z-index: 0;
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   19. ULTRA-PREMIUM CINEMATIC PRELOADER
+   ═══════════════════════════════════════════════════════════
+
+   Architecture & Luxury Details
+   ──────────────────────────────
+   • Deep obsidian-black void (#080706) with soft radial gold bloom
+   • Jewelry-grade SVG chronometer emblem with champagne-gold gradient
+   • Monogram with metallic leaf texture & specular glint sweep
+   • Precision progress indicator with tabular numeric alignment
+   • Two-phase silk-curtain exit + seamless homepage emergence
+   • Session-gated & reload-aware (zero FOUC, zero CLS)
+   • 100% accessible with prefers-reduced-motion graceful fallback
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Prevent body scroll while preloader is active ───────── */
+html[data-preloader="active"] body {
+  overflow: hidden !important;
+}
+
+/* ── Base layer — hidden & inert by default ─────────────── */
+.pl {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, #0d0b09 0%, #060504 100%);
+  background-color: #080706;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+/* ── Visible only when session gate is active ────────────── */
+html[data-preloader="active"] .pl {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* ── Ambient breathing gold bloom ────────────────────────── */
+.pl__bloom {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 55% at 50% 48%,
+      rgba(201, 169, 110, 0.08) 0%,
+      rgba(201, 169, 110, 0.02) 40%,
+      transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  animation: plBloomBreathing 3.6s ease-in-out infinite alternate;
+}
+
+html[data-preloader="active"] .pl__bloom {
+  opacity: 1;
+}
+
+@keyframes plBloomBreathing {
+  0%   { opacity: 0.6; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
+
+/* ── Specular light glint reflection ─────────────────────── */
+.pl__glint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 248, 230, 0.12) 48%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(201, 169, 110, 0.15) 52%,
+    transparent 62%
+  );
+  pointer-events: none;
+  transform: translateX(-160%);
+  opacity: 0;
+}
+
+html[data-preloader="active"] .pl__glint {
+  animation: plGlintSweep 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) 1.1s forwards;
+}
+
+@keyframes plGlintSweep {
+  0%   { transform: translateX(-160%); opacity: 0; }
+  20%  { opacity: 0.9; }
+  80%  { opacity: 0.9; }
+  100% { transform: translateX(160%); opacity: 0; }
+}
+
+/* ── Central luxury emblem wrapper ────────────────────────── */
+.pl__emblem {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  will-change: transform, opacity;
+}
+
+/* ── High-precision SVG ring ─────────────────────────────── */
+.pl__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* Start arc at 12 o'clock */
+}
+
+/* ── Animated golden arc ─────────────────────────────────── */
+.pl__arc {
+  stroke-dasharray: 452.389;   /* 2π × 72 ≈ 452.39 */
+  stroke-dashoffset: 452.389;
+  filter: drop-shadow(0 0 5px rgba(201, 169, 110, 0.45));
+}
+
+html[data-preloader="active"] .pl__arc {
+  animation: plArcDraw 2.3s cubic-bezier(0.25, 1, 0.4, 1) 0.2s forwards;
+}
+
+@keyframes plArcDraw {
+  0%   { stroke-dashoffset: 452.389; opacity: 0.4; }
+  20%  { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* ── Cardinal ticks & micro-diamonds ─────────────────────── */
+.pl__ticks {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+html[data-preloader="active"] .pl__ticks {
+  opacity: 1;
+  transition-delay: 0.35s;
+}
+
+.pl__tick {
+  stroke: #c9a96e;
+  opacity: 0.6;
+}
+
+.pl__diamond {
+  opacity: 0.8;
+  filter: drop-shadow(0 0 3px rgba(201, 169, 110, 0.5));
+}
+
+/* ── Bespoke Cormorant Garamond monogram ──────────────────── */
+.pl__monogram {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.9);
+  will-change: transform, opacity;
+}
+
+html[data-preloader="active"] .pl__monogram {
+  animation: plMonoEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+}
+
+@keyframes plMonoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.pl__letter {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 4.5rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #fff5db 0%, #d4b276 40%, #c9a96e 70%, #9e7f42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(201, 169, 110, 0.3));
+  user-select: none;
+}
+
+/* ── Wordmark (Name + Title) ─────────────────────────────── */
+.pl__wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: transform, opacity;
+}
+
+html[data-preloader="active"] .pl__wordmark {
+  animation: plWordmarkEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+}
+
+@keyframes plWordmarkEntrance {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.pl__name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.16em;
+  color: #f7f3eb;
+  line-height: 1;
+  user-select: none;
+}
+
+.pl__divider {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.45), transparent);
+  margin: 0.15rem 0;
+}
+
+.pl__title {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8a8171;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ── Sophisticated Progress Indicator ─────────────────────── */
+.pl__progress-wrap {
+  position: absolute;
+  bottom: 2.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: min(220px, 58vw);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+html[data-preloader="active"] .pl__progress-wrap {
+  animation: plProgressEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.95s forwards;
+}
+
+@keyframes plProgressEntrance {
+  0%   { opacity: 0; transform: translate(-50%, 8px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.pl__progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.pl__status {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(201, 169, 110, 0.55);
+}
+
+.pl__count {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #c9a96e;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.pl__progress-track {
+  width: 100%;
+  height: 1px;
+  background: rgba(201, 169, 110, 0.12);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pl__progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(201, 169, 110, 0.4) 0%, #c9a96e 70%, #fff2d6 100%);
+  box-shadow: 0 0 6px rgba(201, 169, 110, 0.45);
+  border-radius: 99px;
+  transition: width 0.16s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pl__progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: plFillShimmer 1.4s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+html[data-preloader="active"] .pl__progress-fill::after {
+  opacity: 1;
+}
+
+@keyframes plFillShimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+
+/* ── Exit — Phase 1: Inner elements gently dissolve ──────── */
+.pl--fade .pl__emblem,
+.pl--fade .pl__wordmark,
+.pl--fade .pl__progress-wrap,
+.pl--fade .pl__bloom,
+.pl--fade .pl__glint {
+  opacity: 0 !important;
+  transform: scale(0.98) !important;
+  transition: opacity 0.52s cubic-bezier(0.4, 0, 1, 1), transform 0.52s cubic-bezier(0.4, 0, 1, 1) !important;
+}
+
+/* ── Exit — Phase 2: Silk curtain glides upwards ─────────── */
+.pl--exit {
+  transform: translateY(-100%) !important;
+  transition: transform 0.92s cubic-bezier(0.77, 0, 0.175, 1) !important;
+  pointer-events: none !important;
+}
+
+/* ── After exit: Completely removed from layout & paint ─── */
+.pl--done {
+  display: none !important;
+}
+
+/* ── Seamless Homepage Emergence Transition ─────────────────
+   Activated synchronously as the silk curtain begins to lift.
+   Subtly breathes the hero content into focus.
+──────────────────────────────────────────────────────────── */
+html.is-revealing .hero-content {
+  animation: heroEmerge 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+html.is-revealing .hero-visual {
+  animation: heroVisualEmerge 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
+}
+
+@keyframes heroEmerge {
+  0% {
+    opacity: 0.82;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroVisualEmerge {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.975) translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Accessibility: Prefers-Reduced-Motion ────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html[data-preloader="active"] .pl__bloom,
+  html[data-preloader="active"] .pl__glint,
+  html[data-preloader="active"] .pl__arc,
+  html[data-preloader="active"] .pl__monogram,
+  html[data-preloader="active"] .pl__wordmark,
+  html[data-preloader="active"] .pl__progress-wrap,
+  html.is-revealing .hero-content,
+  html.is-revealing .hero-visual {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .pl__progress-fill::after {
+    animation: none !important;
+  }
+
+  .pl--fade,
+  .pl--exit {
+    opacity: 0 !important;
+    transform: none !important;
+    transition: opacity 0.45s ease !important;
+  }
+}
+
