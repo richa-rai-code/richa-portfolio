@@ -1,0 +1,63 @@
+# _data/projects.yml
+# Add or edit projects here. Each project supports:
+#   number      – display number (e.g. "01")
+#   title       – project name
+#   description – short paragraph
+#   tech        – list of technology tags
+#   github_url  – GitHub repo URL ("" = placeholder/hidden)
+#   live_url    – Live site URL  ("" = hidden)
+#   wip         – true = show "In progress" badge instead of links
+
+- number: "01"
+  title: Student Grade Calculator
+  description: >-
+    A Python program that accepts marks as input, calculates the overall
+    grade, and presents a clear result. Focuses on conditionals, arithmetic,
+    and clean program flow.
+  tech:
+    - Python
+  github_url: ""   # PLACEHOLDER: replace with real URL e.g. https://github.com/your-username/grade-calculator
+  live_url: ""
+  wip: false
+
+- number: "02"
+  title: Student Record Management
+  description: >-
+    A beginner-friendly program for storing, viewing, and managing student
+    information. Practices file handling, data structures, and basic CRUD
+    operations.
+  tech:
+    - Python
+    - C
+  github_url: ""   # PLACEHOLDER: replace with real URL e.g. https://github.com/your-username/student-records
+  live_url: ""
+  wip: false
+
+- number: "03"
+  title: Personal Portfolio Website
+  description: >-
+    This portfolio — a minimal, responsive Jekyll website built with semantic
+    HTML, vanilla CSS, and vanilla JavaScript. Designed from scratch without
+    frameworks or templates.
+  tech:
+    - HTML
+    - CSS
+    - JavaScript
+    - Jekyll
+  github_url: ""   # PLACEHOLDER: replace with real URL e.g. https://github.com/your-username/portfolio
+  live_url: ""     # PLACEHOLDER: replace with live URL e.g. https://richarai.github.io
+  wip: false
+
+- number: "04"
+  title: Data Analysis Projects
+  description: >-
+    A growing collection of NumPy and Pandas explorations — loading datasets,
+    cleaning data, computing statistics, and visualising patterns. Check back
+    as this section fills up.
+  tech:
+    - Python
+    - NumPy
+    - Pandas
+  github_url: ""
+  live_url: ""
+  wip: true

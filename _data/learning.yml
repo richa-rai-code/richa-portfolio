@@ -1,0 +1,23 @@
+# _data/learning.yml
+# Items displayed in the "Currently exploring" section.
+# Add or remove items here — the template renders them automatically.
+
+- title: Python Programming
+  description: >-
+    Deepening understanding of functions, file handling, OOP,
+    and the Python standard library.
+
+- title: "Data Analysis with NumPy &amp; Pandas"
+  description: >-
+    Learning to manipulate arrays, explore datasets, and draw
+    insights from structured data.
+
+- title: "SQL &amp; Database Management"
+  description: >-
+    Practising queries, understanding relational models, and
+    applying DBMS concepts in coursework.
+
+- title: "Fundamentals of Data Science &amp; AI"
+  description: >-
+    Exploring the foundations — statistics, the data pipeline,
+    and introductory machine learning concepts.

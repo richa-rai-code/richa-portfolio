@@ -1,0 +1,24 @@
+<!-- ══════════════════════════════════════════
+     LEARNING JOURNEY — _includes/learning.html
+     Data source: _data/learning.yml
+══════════════════════════════════════════ -->
+<section class="section section-alt" id="learning" aria-labelledby="learning-heading">
+  <div class="container">
+    <p class="section-label reveal">What's Next</p>
+    <h2 id="learning-heading" class="section-heading reveal">
+      Currently exploring.
+    </h2>
+
+    <div class="learning-list reveal reveal-delay-1">
+      {% for item in site.data.learning %}
+      <div class="learning-item">
+        <div class="learning-dot" aria-hidden="true"></div>
+        <div>
+          <h3 class="learning-title">{{ item.title }}</h3>
+          <p class="learning-desc">{{ item.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

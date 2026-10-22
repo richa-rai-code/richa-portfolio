@@ -1,0 +1,107 @@
+<!-- ══════════════════════════════════════════
+     HERO — _includes/hero.html
+     Two-column desktop layout, mobile-stacked
+══════════════════════════════════════════ -->
+<section class="hero section" id="home" aria-labelledby="hero-heading">
+  <div class="container hero-inner">
+
+    <!-- Left Column: Core content -->
+    <div class="hero-content">
+      <p class="hero-eyebrow">
+        BCA STUDENT &middot; DATA SCIENCE &amp; AI
+      </p>
+
+      <h1 id="hero-heading" class="hero-heading">
+        Hi, I'm Richa Rai.
+      </h1>
+
+      <p class="hero-sub">
+        Exploring Data. Building with Code.
+      </p>
+
+      <p class="hero-desc">
+        I'm a BCA student specializing in Data Science and Artificial Intelligence, building my programming fundamentals and exploring how technology can solve real-world problems.
+      </p>
+
+      <div class="hero-actions">
+        <a href="{{ '/#projects' | relative_url }}" class="btn btn-primary">Explore My Work</a>
+        <a href="{{ '/#contact'  | relative_url }}" class="btn btn-ghost">Get in Touch</a>
+      </div>
+
+      <!-- Availability / status badge -->
+      <div class="status-badge" aria-label="Current status: Learning, Building, Growing">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Learning &bull; Building &bull; Growing</span>
+      </div>
+    </div>
+
+    <!-- Right Column: Subtle data-inspired visual card -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="data-card">
+        <div class="data-card-header">
+          <span class="data-card-title">DATA LAB &bull; EXPLORATION</span>
+          <span class="data-card-chip">ACTIVE</span>
+        </div>
+
+        <svg class="data-graphic" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <defs>
+            <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5b4fcf" stop-opacity="0.16"/>
+              <stop offset="100%" stop-color="#5b4fcf" stop-opacity="0.0"/>
+            </linearGradient>
+            <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7c6ee0"/>
+              <stop offset="100%" stop-color="#5b4fcf"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Background coordinate grid -->
+          <line x1="16" y1="155" x2="304" y2="155" stroke="#ece7e1" stroke-width="1"/>
+          <line x1="16" y1="120" x2="304" y2="120" stroke="#f2eeea" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="16" y1="85"  x2="304" y2="85"  stroke="#f2eeea" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="16" y1="50"  x2="304" y2="50"  stroke="#f2eeea" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="16" y1="15"  x2="304" y2="15"  stroke="#f2eeea" stroke-width="1" stroke-dasharray="3 3"/>
+
+          <!-- Subtle histogram bars -->
+          <rect x="28"  y="110" width="20" height="45" rx="3" fill="#ebe6f8"/>
+          <rect x="66"  y="85"  width="20" height="70" rx="3" fill="#dfd8f5"/>
+          <rect x="104" y="65"  width="20" height="90" rx="3" fill="#d2c8f0"/>
+          <rect x="142" y="95"  width="20" height="60" rx="3" fill="#dfd8f5"/>
+          <rect x="180" y="52"  width="20" height="103" rx="3" fill="#c3b5ec"/>
+          <rect x="218" y="38"  width="20" height="117" rx="3" fill="#a493e5"/>
+          <rect x="256" y="22"  width="20" height="133" rx="3" fill="url(#barGradient)"/>
+
+          <!-- Area fill beneath curve -->
+          <path d="M 38 110 Q 76 68, 114 62 T 190 48 T 266 22 L 266 155 L 38 155 Z" fill="url(#chartGradient)"/>
+
+          <!-- Primary Trend Curve -->
+          <path d="M 38 110 Q 76 68, 114 62 T 190 48 T 266 22" stroke="#5b4fcf" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+          <!-- Data nodes -->
+          <circle cx="38"  cy="110" r="4" fill="#ffffff" stroke="#5b4fcf" stroke-width="2"/>
+          <circle cx="114" cy="62"  r="4" fill="#ffffff" stroke="#5b4fcf" stroke-width="2"/>
+          <circle cx="190" cy="48"  r="4" fill="#ffffff" stroke="#5b4fcf" stroke-width="2"/>
+          <circle cx="266" cy="22"  r="5" fill="#5b4fcf" stroke="#ffffff" stroke-width="2"/>
+        </svg>
+
+        <div class="data-card-footer">
+          <div class="data-stat">
+            <span class="data-stat-num">BCA</span>
+            <span class="data-stat-label">Undergrad</span>
+          </div>
+          <div class="data-stat-divider"></div>
+          <div class="data-stat">
+            <span class="data-stat-num">Python &amp; SQL</span>
+            <span class="data-stat-label">Core Tech</span>
+          </div>
+          <div class="data-stat-divider"></div>
+          <div class="data-stat">
+            <span class="data-stat-num">AI &amp; DS</span>
+            <span class="data-stat-label">Focus</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

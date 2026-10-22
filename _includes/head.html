@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO (title + description come from page front matter or _config.yml) -->
+    <title>{% if page.title and page.title != "" %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — BCA Student | Data Science &amp; AI{% endif %}</title>
+    <meta
+      name="description"
+      content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}"
+    />
+    <meta name="author" content="{{ site.author }}" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — BCA Student | Data Science &amp; AI{% endif %}" />
+    <meta
+      property="og:description"
+      content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}"
+    />
+    {% if site.url %}<meta property="og:url" content="{{ page.url | absolute_url }}" />{% endif %}
+
+    <!-- Favicon (inline SVG data URI — no external file needed) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#10022;</text></svg>" />
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+  </head>

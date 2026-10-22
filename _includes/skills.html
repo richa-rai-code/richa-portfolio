@@ -1,0 +1,26 @@
+<!-- ══════════════════════════════════════════
+     SKILLS — _includes/skills.html
+     Data source: _data/skills.yml
+     To add/remove skills: edit _data/skills.yml
+══════════════════════════════════════════ -->
+<section class="section section-alt" id="skills" aria-labelledby="skills-heading">
+  <div class="container">
+    <p class="section-label reveal">What I Work With</p>
+    <h2 id="skills-heading" class="section-heading reveal">
+      Technical skills.
+    </h2>
+
+    <div class="skills-grid reveal reveal-delay-1">
+      {% for group in site.data.skills %}
+      <div class="skill-group">
+        <h3 class="skill-group-title">{{ group.category }}</h3>
+        <ul class="skill-tags" role="list">
+          {% for tag in group.tags %}
+          <li class="skill-tag">{{ tag }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

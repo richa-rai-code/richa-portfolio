@@ -1,0 +1,21 @@
+# Jekyll build output — never commit this
+_site/
+
+# Bundler local config and gem cache
+.bundle/
+vendor/
+
+# Jekyll cache
+.jekyll-cache/
+.jekyll-metadata
+
+# Sass cache (not used here, but included for completeness)
+.sass-cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+*.swp

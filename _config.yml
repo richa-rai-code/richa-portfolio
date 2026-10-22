@@ -1,0 +1,72 @@
+# ═══════════════════════════════════════════════════
+# _config.yml — Jekyll site configuration
+# Richa Rai Personal Portfolio
+# ═══════════════════════════════════════════════════
+
+# ── Site identity ───────────────────────────────────
+title: "Richa Rai"
+description: >-
+  BCA student specializing in Data Science and AI, learning to turn ideas
+  into useful digital experiences through programming, data, and technology.
+author: "Richa Rai"
+
+# ── URLs ────────────────────────────────────────────
+# For GitHub Pages (username.github.io/repo-name), set:
+#   url: "https://your-username.github.io"
+#   baseurl: "/your-repo-name"
+#
+# For a root-domain GitHub Pages site (username.github.io), set:
+#   url: "https://your-username.github.io"
+#   baseurl: ""
+#
+# For a custom domain, set:
+#   url: "https://your-custom-domain.com"
+#   baseurl: ""
+#
+# Leave both as "" for local development (bundle exec jekyll serve).
+url: ""
+baseurl: ""
+
+# ── Build settings ──────────────────────────────────
+markdown: kramdown
+highlighter: rouge
+theme: ~          # No theme — we use our own layout
+
+# Tell Jekyll which directories to include
+include:
+  - _includes
+  - _layouts
+  - _data
+  - assets
+
+# Exclude non-production files from _site output
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - "*.sh"
+  - ".git"
+  - ".gitignore"
+  - node_modules
+  - vendor
+
+# ── Plugins ─────────────────────────────────────────
+# Only using plugins supported natively by GitHub Pages.
+plugins:
+  - jekyll-seo-tag
+
+# ── SEO tag defaults (used by jekyll-seo-tag) ───────
+twitter:
+  card: summary
+social:
+  name: Richa Rai
+
+# ── Data used across the site ───────────────────────
+# (Skills, projects, and learning items are in _data/)
+
+# ── Permalink style ─────────────────────────────────
+permalink: pretty
+
+# ── Sass (not used — we ship plain CSS) ─────────────
+# sass:
+#   style: compressed

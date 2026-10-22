@@ -1,0 +1,54 @@
+<!-- ══════════════════════════════════════════
+     NAVIGATION — _includes/header.html
+══════════════════════════════════════════ -->
+<header class="nav-wrapper" id="nav" role="banner">
+  <nav class="nav container" aria-label="Primary navigation">
+    <a href="{{ '/#home' | relative_url }}" class="nav-logo" aria-label="{{ site.title }} — home">
+      {{ site.title }}
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="nav-links" role="list">
+      <li><a href="{{ '/#home'     | relative_url }}" class="nav-link">Home</a></li>
+      <li><a href="{{ '/#about'    | relative_url }}" class="nav-link">About</a></li>
+      <li><a href="{{ '/#skills'   | relative_url }}" class="nav-link">Skills</a></li>
+      <li><a href="{{ '/#projects' | relative_url }}" class="nav-link">Projects</a></li>
+      <li><a href="{{ '/#contact'  | relative_url }}" class="nav-link">Contact</a></li>
+    </ul>
+
+    <a href="{{ '/#contact' | relative_url }}" class="btn btn-sm btn-outline nav-cta">
+      Let's Connect
+    </a>
+
+    <!-- Mobile hamburger button -->
+    <button
+      class="hamburger"
+      id="hamburger"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div
+    class="mobile-menu"
+    id="mobile-menu"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="Navigation menu"
+  >
+    <ul class="mobile-links" role="list">
+      <li><a href="{{ '/#home'     | relative_url }}" class="mobile-link">Home</a></li>
+      <li><a href="{{ '/#about'    | relative_url }}" class="mobile-link">About</a></li>
+      <li><a href="{{ '/#skills'   | relative_url }}" class="mobile-link">Skills</a></li>
+      <li><a href="{{ '/#projects' | relative_url }}" class="mobile-link">Projects</a></li>
+      <li><a href="{{ '/#contact'  | relative_url }}" class="mobile-link">Contact</a></li>
+    </ul>
+    <a href="{{ '/#contact' | relative_url }}" class="btn btn-outline mobile-cta">Let's Connect</a>
+  </div>
+</header>

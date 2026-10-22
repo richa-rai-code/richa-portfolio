@@ -1,0 +1,24 @@
+# _data/skills.yml
+# Edit this file to add, remove, or rename skills.
+# Each top-level item is a category with a list of tags.
+
+- category: Programming
+  tags:
+    - Python
+    - C
+
+- category: Data Analysis
+  tags:
+    - NumPy
+    - Pandas
+
+- category: Database
+  tags:
+    - SQL
+    - DBMS Fundamentals
+
+- category: Tools
+  tags:
+    - Git
+    - GitHub
+    - VS Code
